@@ -24,6 +24,7 @@ class Karteikarte {
 document.getElementById('btnCard').addEventListener('click', flipCard);
 document.addEventListener('DOMContentLoaded', createCard);
 
+// Objekte erstellen
 var k_4711 = new Karteikarte(
  "Unified Modeling Language",
  "Die UML ist eine standardisierte Notation zur Darstellung von Informationen über Symbole und Texte. Sie dient der Modellierung objektorientierter Softwaresysteme.",
@@ -58,13 +59,13 @@ function createCard() {
 }
 
 
+// Flip Card
 function flipCard() {
 
     if(cardDiscovered == false) {
         //document.getElementById('btnCard').style.backgroundColor = "lightblue";
         document.getElementById('kartei_RuecksBegriff').innerHTML = zufallsKarte.begriff;
         document.getElementById('kartei_Begriff').innerHTML = zufallsKarte.beschreibung;
-        document.getElementById('btnCard').style.boxShadow = "9px 9px 16px black;";
         cardDiscovered = true;
     }else{
         //document.getElementById('btnCard').style.backgroundColor = "yellow";
