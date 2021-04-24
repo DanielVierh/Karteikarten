@@ -21,7 +21,11 @@ class Karteikarte {
 
 //============================================================================================================================
 
-document.getElementById('btnCard').addEventListener('click', flipCard);
+var buttonCard = document.getElementById('btnCard');
+if(buttonCard) {
+    buttonCard.addEventListener('click', flipCard);
+}
+
 document.addEventListener('DOMContentLoaded', createCard);
 
 // Objekte erstellen
@@ -55,8 +59,10 @@ function createCard() {
     zufallsZahl = parseInt(Math.random() * arrLength);
     zufallsKarte = arrKarteikarten[zufallsZahl];
     wissensstandAbfrage();
-    document.getElementById('kartei_Begriff').innerHTML = zufallsKarte.begriff;
-    
+    var x_1 = document.getElementById('kartei_Begriff');
+    if(x_1){
+       document.getElementById('kartei_Begriff').innerHTML = zufallsKarte.begriff; 
+    }
 }
 
 
@@ -77,17 +83,26 @@ function flipCard() {
 
 
 // Gewusst  
-document.getElementById('btn_Gewusst').addEventListener('click', function() {
+var buttonGewusst = document.getElementById('btn_Gewusst');
+if(buttonGewusst) {
+    buttonGewusst.addEventListener('click', gewusst);
+}
+
+function gewusst() {
     zufallsKarte.wissenstandZaehler += 1;
     document.getElementById('kartei_Begriff').innerHTML = "";
     document.getElementById('kartei_RuecksBegriff').innerHTML = "";
     cardDiscovered = false;
-
     createCard();
-});
+}
 
 // Nicht gewusst 
-document.getElementById('btn_NichtGewusst').addEventListener('click', function() {
+var buttonNichtGewusst = document.getElementById('btn_NichtGewusst');
+if(buttonNichtGewusst) {
+    buttonNichtGewusst.addEventListener('click', nichtGewusst);
+}
+
+function nichtGewusst() {
     if(zufallsKarte.wissenstandZaehler >= 1) {
         zufallsKarte.wissenstandZaehler -= 1;
         document.getElementById('kartei_Begriff').innerHTML = "";
@@ -96,7 +111,7 @@ document.getElementById('btn_NichtGewusst').addEventListener('click', function()
 
     }
     createCard();
-});
+}
 
 
 function wissensstandAbfrage() {
@@ -115,8 +130,22 @@ function wissensstandAbfrage() {
         zufallsKarte.wissensstand = "Voll verstanden";
         zufallsKarte.abgefragt = true;
     }
-    document.getElementById('kartei_wissensstand').innerHTML = "Stapel: " + zufallsKarte.wissensstand + " [" + zufallsKarte.wissenstandZaehler + " mal gewusst]";
+    var x_1 = document.getElementById('kartei_wissensstand');
+    if(x_1) {
+       document.getElementById('kartei_wissensstand').innerHTML = "Stapel: " + zufallsKarte.wissensstand + " [" + zufallsKarte.wissenstandZaehler + " mal gewusst]"; 
+    }
+    
 }
 
 // Für Flip Card Effekt
 // https://www.w3schools.com/howto/tryit.asp?filename=tryhow_css_flip_card
+
+// ===================================================================================================================================================================
+// NEUE KARTEIKARTE
+// Neue Karteikarte speichern
+var buttonSaveNewKarteikarte = document.getElementById('btnSaveNewKarteikarte');
+if(buttonSaveNewKarteikarte) {
+    buttonSaveNewKarteikarte.addEventListener('click', function() {
+        alert("Yess");
+    }
+    )};
