@@ -14,6 +14,8 @@ body{
     text-align: center;
 }
 
+
+
 .row{
     background-color: yellow;
     height: 350px;
@@ -35,9 +37,13 @@ body{
     cursor: pointer;
 }
 
+.row0{
+    height: 80px;
+}
+
 .row2{
 
-    height: 170px;
+    height: 200px;
     width: 80%;
     background-color: aqua;
     border: 1px solid black;
@@ -52,6 +58,26 @@ body{
 .row2:hover{
     cursor: default;
 }
+
+.row3{
+    background: cadetblue;
+    height: 500px;
+    justify-content: center;
+}
+
+.row4{
+    background: rgb(0,0,0,0.5);
+    height: 70px;
+    color: white;
+    text-align: center;
+    border-radius: 14px;
+}
+
+.row4:hover{
+    box-shadow: 0px 0px 0px black;
+}
+
+
 
 .button1{
     border-radius: 12px;
@@ -73,15 +99,6 @@ body{
     margin-left: 20px;
 }
 
-
-.formumrandung{
-    width: 300px;
-    height: 600px;
-    border: 2px solid black;
-    justify-content: center;
-    margin-left: 30px;
-}
-
 .formContent{
 
     margin: 5px 0px 0px 30px;
@@ -90,6 +107,8 @@ body{
 
 
 .submButton{
-    color: black;
+    color: white;
+    background-color: rgb(97, 146, 0);
     font-size: 12px;
+    width: 80px;
 }

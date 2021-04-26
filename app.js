@@ -26,32 +26,18 @@ if(buttonCard) {
     buttonCard.addEventListener('click', flipCard);
 }
 
-document.addEventListener('DOMContentLoaded', createCard);
-
-// Objekte erstellen
-var k_4711 = new Karteikarte(
- "Unified Modeling Language",
- "Die UML ist eine standardisierte Notation zur Darstellung von Informationen über Symbole und Texte. Sie dient der Modellierung objektorientierter Softwaresysteme.",
- false,
- "NEU",
- 0);
-
-var k_0815 = new Karteikarte(
-"Shared-Methoden",
-"Freigegebene Methoden. Können aufgerufen werden, ohne dass eine Instanz der Klasse erstellt wird. Beispiele sind die Methoden Format, Compare, Concat der Klasse String.",
-false,
-"NEU",
-0);
-
-var k_8455 = new Karteikarte("Polymorphie","Polymorphie bedeutet Vielgestaltigkeit und beschreibt die Fähigkeit von Subklassen (abgeleiteten Klassen),die Methoden der Basisklasse mit unterschiedlichen Implementierungen zu verwenden.",
-false,
-"NEU",
-0);
-
-// Noch manuelles hinzufügen zum Array
-arrKarteikarten.push(k_4711);
-arrKarteikarten.push(k_0815);
-arrKarteikarten.push(k_8455);
+// Load Content
+document.addEventListener('DOMContentLoaded', loadCont);
+function loadCont() {
+    if(localStorage.getItem('karteikarten') === null){
+        console.log("Laden hat NICHT geklappt");
+    }else{
+        console.log("Laden hat geklappt");
+        loadCards();
+    }
+    console.log(arrKarteikarten);
+    createCard();
+}
 
 // Erstellt neue Random Card
 function createCard() {
@@ -93,6 +79,7 @@ function gewusst() {
     document.getElementById('kartei_Begriff').innerHTML = "";
     document.getElementById('kartei_RuecksBegriff').innerHTML = "";
     cardDiscovered = false;
+    saveCards();
     createCard();
 }
 
@@ -108,7 +95,7 @@ function nichtGewusst() {
         document.getElementById('kartei_Begriff').innerHTML = "";
         document.getElementById('kartei_RuecksBegriff').innerHTML = "";
         cardDiscovered = false;
-
+        saveCards();
     }
     createCard();
 }
@@ -134,11 +121,7 @@ function wissensstandAbfrage() {
     if(x_1) {
        document.getElementById('kartei_wissensstand').innerHTML = "Stapel: " + zufallsKarte.wissensstand + " [" + zufallsKarte.wissenstandZaehler + " mal gewusst]"; 
     }
-    
 }
-
-// Für Flip Card Effekt
-// https://www.w3schools.com/howto/tryit.asp?filename=tryhow_css_flip_card
 
 // ===================================================================================================================================================================
 // NEUE KARTEIKARTE
@@ -146,6 +129,39 @@ function wissensstandAbfrage() {
 var buttonSaveNewKarteikarte = document.getElementById('btnSaveNewKarteikarte');
 if(buttonSaveNewKarteikarte) {
     buttonSaveNewKarteikarte.addEventListener('click', function() {
-        alert("Yess");
+        var newTerm = document.getElementById('txtBegriff').value;
+        var newDescr = document.getElementById('txtBeschreibung').value;
+
+        if(checkWort(newTerm) && checkWort(newDescr)) {
+            //let k_47851 = new Karteikarte(newTerm,newDescr,false,"NEU",0);
+            if(arrKarteikarten == null) {
+              arrKarteikarten = [];
+              arrKarteikarten.push(new Karteikarte(newTerm,newDescr,false,"NEU",0));     
+            }else{
+              arrKarteikarten.push(new Karteikarte(newTerm,newDescr,false,"NEU",0));  
+            }
+            document.getElementById('txtBegriff').value = "";
+            document.getElementById('txtBeschreibung').value = "";
+            // // Save
+            saveCards();           
+        }else{
+            alert("Bitte beide Textfelder ausfüllen!");
+        }
     }
     )};
+
+    function checkWort(wrt) {
+        if (wrt == "") {
+            return false;
+        }else{
+            return true;
+        }
+    }
+
+    function saveCards() {
+        localStorage.setItem("storedCards", JSON.stringify(arrKarteikarten));
+    }
+
+    function loadCards() {
+        arrKarteikarten = JSON.parse(localStorage.getItem("storedCards"));
+    }
