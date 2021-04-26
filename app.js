@@ -61,7 +61,8 @@ function flipCard() {
         cardDiscovered = true;
     }else{
         document.getElementById('kartei_RuecksBegriff').innerHTML = "";
-        document.getElementById('kartei_Begriff').innerHTML = zufallsKarte.begriff;
+        //document.getElementById('kartei_Begriff').innerHTML = zufallsKarte.begriff;
+        createCard();
         cardDiscovered = false;
     }
     
