@@ -41,14 +41,20 @@ function loadCont() {
 
 // Erstellt neue Random Card
 function createCard() {
-    const arrLength = arrKarteikarten.length;
-    zufallsZahl = parseInt(Math.random() * arrLength);
-    zufallsKarte = arrKarteikarten[zufallsZahl];
-    wissensstandAbfrage();
-    var x_1 = document.getElementById('kartei_Begriff');
-    if(x_1){
-       document.getElementById('kartei_Begriff').innerHTML = zufallsKarte.begriff; 
+    try{
+        const arrLength = arrKarteikarten.length;
+        zufallsZahl = parseInt(Math.random() * arrLength);
+        zufallsKarte = arrKarteikarten[zufallsZahl];
+        wissensstandAbfrage();
+        var x_1 = document.getElementById('kartei_Begriff');
+        if(x_1){
+           document.getElementById('kartei_Begriff').innerHTML = zufallsKarte.begriff; 
+        }
+    }catch{
+        document.getElementById('kartei_Begriff').innerHTML = "LEER";
     }
+
+
 }
 
 
@@ -56,14 +62,23 @@ function createCard() {
 function flipCard() {
 
     if(cardDiscovered == false) {
-        document.getElementById('kartei_RuecksBegriff').innerHTML = zufallsKarte.begriff;
-        document.getElementById('kartei_Begriff').innerHTML = zufallsKarte.beschreibung;
-        cardDiscovered = true;
+        try{
+            document.getElementById('kartei_RuecksBegriff').innerHTML = zufallsKarte.begriff;
+            document.getElementById('kartei_Begriff').innerHTML = zufallsKarte.beschreibung;
+            cardDiscovered = true;
+        }catch{
+            console.log("Karte konnte nicht umgedreht werden");
+        }
     }else{
-        document.getElementById('kartei_RuecksBegriff').innerHTML = "";
-        //document.getElementById('kartei_Begriff').innerHTML = zufallsKarte.begriff;
-        createCard();
-        cardDiscovered = false;
+        try {
+            document.getElementById('kartei_RuecksBegriff').innerHTML = "";
+            //document.getElementById('kartei_Begriff').innerHTML = zufallsKarte.begriff;
+            createCard();
+            cardDiscovered = false;
+        } catch (error) {
+            console.log(error);
+        }
+
     }
     
 }
