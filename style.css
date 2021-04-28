@@ -18,12 +18,12 @@ body{
 
 .row{
     background-color: yellow;
-    height: 350px;
+    height: 300px;
     width: 80%;
     text-align: center ;
     font-weight: bold;
     border: 2px solid rgb(2, 20, 17);
-    margin-bottom: 80px;
+    margin-bottom: 60px;
     padding-top: 20px ;
     box-shadow: 9px 9px 16px black;
     overflow-y: auto;
@@ -38,7 +38,7 @@ body{
 }
 
 .row0{
-    height: 80px;
+    height: 130px;
 }
 
 .row2{
@@ -53,6 +53,7 @@ body{
     background-size: cover;
     backdrop-filter: blur(30px);
     border-radius: 12px;
+    color: white;
 }
 
 .row2:hover{
@@ -66,18 +67,47 @@ body{
 }
 
 .row4{
-    background: rgb(0,0,0,0.5);
+    background: rgba(0, 0, 0, 0);
     height: 70px;
-    color: white;
     text-align: center;
     border-radius: 14px;
+    justify-content: center;
+    box-shadow: 0px 0px 0px transparent;
+    border: 0px ;
 }
 
 .row4:hover{
-    box-shadow: 0px 0px 0px black;
+    
+    cursor: default;
+}
+
+.btnOben{
+    width: 80%;
+    height: 50px;
+    background: rgb(0,0,0,0.5);
+    border-radius: 14px;
+    color: white;
+    font-weight: bold;
+    font-size: 24px;
 }
 
 
+
+.rowNxt{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+}
+
+.aktionsButton{
+    width: 80px;
+    height: 25px;
+    background-color: rgb(16, 69, 150);
+    color: white;
+    margin: 10px 30px 10px 20px;
+    border-radius: 12px;
+    text-align: center;
+}
 
 .button1{
     border-radius: 12px;
@@ -88,6 +118,8 @@ body{
     box-shadow: 3px 3px 10px black;
     color: white;
 }
+
+
 
 #btn_Gewusst{
     background-color: green;

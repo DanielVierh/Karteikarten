@@ -126,13 +126,7 @@ function nichtGewusst() {
     }
 }
 
-// Scroll up
-var buttonScrollUp = document.getElementById('btn_ScrollUp');
-if(buttonScrollUp) {
-    document.addEventListener('click', function() {
-        window.scrollTo(0, 0);
-    });
-}
+
 
 // Aktualisiert Wissensstand
 function wissensstandAbfrage() {
@@ -200,3 +194,10 @@ if(buttonSaveNewKarteikarte) {
         arrKarteikarten = JSON.parse(localStorage.getItem("storedCards"));
         console.log("Card´s loaded");
     }
+
+
+    // Scroll up
+function scroll_UP() {
+    window.scrollTo(0, 0);
+    console.log("ScrollUP");
+}
