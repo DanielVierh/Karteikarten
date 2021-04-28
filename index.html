@@ -20,8 +20,8 @@
             <h1 id="anzKarten">Karteikarten (0)</h1>
             <div class="container">
               <div class="rowNxt">
-                <button class="aktionsButton" onclick="scroll_to_New()">NEU</button>
-                <button class="aktionsButton" onclick="deleteCurrent()">Löschen</button>
+                <button class="aktionsButton" onclick="scroll_to_New()">NEU &#128196</button>
+                <button class="aktionsButton" onclick="deleteCurrent()">Löschen &#128465</button>
               </div>
 
             </div>
@@ -36,37 +36,38 @@
           </div>
         </div>
       </div>
-
+      <!-- Steuerelement -->
       <div class="container">
         <div class="row row2">
         <div class="col-sm" id="btnCard">
           <p id="kartei_wissensstand"></p>
           <hr>
           <h1>Gewusst?</h1>
-          <button class="button1 btnJ" onclick="gewusst()">J</button>
-          <button class="button1 btnN" onclick="nichtGewusst()">N</button>
+          <button class="button1 btnJ" onclick="gewusst()">&#128077</button>
+          <button class="button1 btnN" onclick="nichtGewusst()">&#128078</button>
         </div>
       </div>
       </div>
       <br><br>
         <hr>    
+        <!-- Neue Karte -->
       <div class="container">
           <div class="row row3">
-            <h1>Neue Karte</h1>
-            <p class="">Begriff</p> 
-            <input class="" type="text" id="txtBegriff">
+            <h1>Neue Karte erstellen</h1>
+            <p class="">Begriff (Vorderseite)</p> 
+            <input class="textfeldBegriff" type="text" id="txtBegriff">
             <br> <hr> <br>
             
-            <p class="">Beschreibung</p>
-            <textarea class="" type="text" id="txtBeschreibung"></textarea>
+            <p class="">Beschreibung (Rückseite)</p>
+            <textarea class="textfeldRuek" type="text" id="txtBeschreibung"></textarea>
             <br> <hr> <br>
-            <button class="submButton button1" id="btnSaveNewKarteikarte">Speichern</button>
+            <button class="submButton button1" id="btnSaveNewKarteikarte">Speichern &#128190</button>
           </div>
       </div>
 
       <div class="container">
           <div class="row row4">
-            <button onclick="scroll_UP()" class="btnOben">Nach oben</button>
+            <button onclick="scroll_UP()" class="btnOben">Nach oben &#9195</button>
           </div>
       </div>
 </body>

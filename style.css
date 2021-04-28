@@ -38,7 +38,23 @@ body{
 }
 
 .row0{
-    height: 130px;
+    height: 140px;
+    width: 100%;
+    background: rgba(22, 22, 22, 0.685);
+    color: yellow;
+    box-shadow: 0px 0px 0px transparent;
+
+}
+
+.aktionsButton{
+    width: 130px;
+    height: 35px;
+    background-color: rgb(36, 97, 187);
+    color: white;
+    margin: 10px 30px 10px 20px;
+    border-radius: 12px;
+    text-align: center;
+    font-weight: bold;
 }
 
 .row2{
@@ -62,8 +78,9 @@ body{
 
 .row3{
     background: cadetblue;
-    height: 500px;
+    height: 600px;
     justify-content: center;
+
 }
 
 .row4{
@@ -99,16 +116,7 @@ body{
     justify-content: space-evenly;
 }
 
-.aktionsButton{
-    width: 90px;
-    height: 35px;
-    background-color: rgb(16, 69, 150);
-    color: white;
-    margin: 10px 30px 10px 20px;
-    border-radius: 12px;
-    text-align: center;
-    font-weight: bold;
-}
+
 
 .button1{
     border-radius: 12px;
@@ -142,6 +150,22 @@ body{
 .submButton{
     color: white;
     background-color: rgb(97, 146, 0);
-    font-size: 12px;
-    width: 80px;
+    font-size: 18px;
+    width: 150px;
+}
+
+.textfeldBegriff{
+    border: 2px solid black;
+    width: 95%;
+    border-radius: 12px;
+    text-align: center;
+    font-weight: bold;
+}
+
+.textfeldRuek{
+    border: 2px solid black;
+    width: 95%;
+    height: 150px;
+    margin-top: 5px;
+    border-radius: 12px;
 }

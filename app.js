@@ -174,7 +174,8 @@ if(buttonSaveNewKarteikarte) {
             document.getElementById('txtBegriff').value = "";
             document.getElementById('txtBeschreibung').value = "";
              // Save
-            saveCards();           
+            saveCards();
+            alert("Die Karteikarte wurde erfolgreich gespeichert");           
         }else{
             alert("Bitte beide Textfelder ausfüllen!");
         }
