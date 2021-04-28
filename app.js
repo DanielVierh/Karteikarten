@@ -29,7 +29,7 @@ if(buttonCard) {
 // Load Content
 document.addEventListener('DOMContentLoaded', loadCont);
 function loadCont() {
-    if(localStorage.getItem('karteikarten') === null){
+    if(localStorage.getItem('storedCards') === null){
         console.log("Laden hat NICHT geklappt");
     }else{
         console.log("Laden hat geklappt");
@@ -50,8 +50,9 @@ function createCard() {
         if(x_1){
            document.getElementById('kartei_Begriff').innerHTML = zufallsKarte.begriff; 
         }
-    }catch{
+    }catch (error){
         document.getElementById('kartei_Begriff').innerHTML = "LEER";
+        console.log(error);
     }
 
 
@@ -66,8 +67,9 @@ function flipCard() {
             document.getElementById('kartei_RuecksBegriff').innerHTML = zufallsKarte.begriff;
             document.getElementById('kartei_Begriff').innerHTML = zufallsKarte.beschreibung;
             cardDiscovered = true;
-        }catch{
+        }catch(error){
             console.log("Karte konnte nicht umgedreht werden");
+            console.log(error);
         }
     }else{
         try {
@@ -91,12 +93,16 @@ if(buttonGewusst) {
 }
 
 function gewusst() {
-    zufallsKarte.wissenstandZaehler += 1;
-    document.getElementById('kartei_Begriff').innerHTML = "";
-    document.getElementById('kartei_RuecksBegriff').innerHTML = "";
-    cardDiscovered = false;
-    saveCards();
-    createCard();
+    try {
+        zufallsKarte.wissenstandZaehler += 1;
+        document.getElementById('kartei_Begriff').innerHTML = "";
+        document.getElementById('kartei_RuecksBegriff').innerHTML = "";
+        cardDiscovered = false;
+        saveCards();
+        createCard();
+    } catch (error) {
+        console.log(error);
+    }
 }
 
 // Nicht gewusst 
@@ -106,14 +112,18 @@ if(buttonNichtGewusst) {
 }
 
 function nichtGewusst() {
-    if(zufallsKarte.wissenstandZaehler >= 1) {
-        zufallsKarte.wissenstandZaehler -= 1;
-        document.getElementById('kartei_Begriff').innerHTML = "";
-        document.getElementById('kartei_RuecksBegriff').innerHTML = "";
-        cardDiscovered = false;
-        saveCards();
+    try {
+        if(zufallsKarte.wissenstandZaehler >= 1) {
+            zufallsKarte.wissenstandZaehler -= 1;
+            document.getElementById('kartei_Begriff').innerHTML = "";
+            document.getElementById('kartei_RuecksBegriff').innerHTML = "";
+            cardDiscovered = false;
+            saveCards();
+        }
+        createCard();
+    } catch (error) {
+        console.log(error);
     }
-    createCard();
 }
 
 
@@ -149,7 +159,6 @@ if(buttonSaveNewKarteikarte) {
         var newDescr = document.getElementById('txtBeschreibung').value;
 
         if(checkWort(newTerm) && checkWort(newDescr)) {
-            //let k_47851 = new Karteikarte(newTerm,newDescr,false,"NEU",0);
             if(arrKarteikarten == null) {
               arrKarteikarten = [];
               arrKarteikarten.push(new Karteikarte(newTerm,newDescr,false,"NEU",0));     
@@ -158,7 +167,7 @@ if(buttonSaveNewKarteikarte) {
             }
             document.getElementById('txtBegriff').value = "";
             document.getElementById('txtBeschreibung').value = "";
-            // // Save
+             // Save
             saveCards();           
         }else{
             alert("Bitte beide Textfelder ausfüllen!");
@@ -176,8 +185,10 @@ if(buttonSaveNewKarteikarte) {
 
     function saveCards() {
         localStorage.setItem("storedCards", JSON.stringify(arrKarteikarten));
+        console.log("Card´s saved");
     }
 
     function loadCards() {
         arrKarteikarten = JSON.parse(localStorage.getItem("storedCards"));
+        console.log("Card´s loaded");
     }
