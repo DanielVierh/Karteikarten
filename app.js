@@ -201,3 +201,12 @@ function scroll_UP() {
     window.scrollTo(0, 0);
     console.log("ScrollUP");
 }
+
+function scroll_to_New() {
+    window.scrollTo(0, 1200);
+}
+
+
+function deleteCurrent(){
+    alert("Funktion wird noch gebaut");
+}
