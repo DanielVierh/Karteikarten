@@ -65,7 +65,7 @@ function flipCard() {
 
     if(cardDiscovered == false) {
         try{
-            window.scrollTo(0, 70);
+            window.scrollTo(0, 130);
             document.getElementById('kartei_RuecksBegriff').innerHTML = zufallsKarte.begriff;
             document.getElementById('kartei_Begriff').innerHTML = zufallsKarte.beschreibung;
             cardDiscovered = true;
