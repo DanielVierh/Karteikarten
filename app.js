@@ -1,6 +1,5 @@
 var cardDiscovered = false;
 var arrKarteikarten = [];
-
 var arrLength = arrKarteikarten.length;
 var zufallsZahl = 0;
 var zufallsKarte = "";
@@ -34,6 +33,8 @@ function loadCont() {
     }else{
         console.log("Laden hat geklappt");
         loadCards();
+        arrLength = arrKarteikarten.length;
+        document.getElementById('anzKarten').innerHTML = "Karteikarten (" + arrLength + ")";
     }
     console.log(arrKarteikarten);
     createCard();
@@ -209,7 +210,7 @@ function scroll_to_New() {
     window.scrollTo(0, 1200);
 }
 
-
+// Delete Section
 function deleteCurrent(){
     alert("Funktion wird noch gebaut");
 }
