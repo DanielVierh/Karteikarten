@@ -100,7 +100,7 @@ body{
 }
 
 .aktionsButton{
-    width: 80px;
+    width: 90px;
     height: 35px;
     background-color: rgb(16, 69, 150);
     color: white;
@@ -122,12 +122,12 @@ body{
 
 
 
-#btn_Gewusst{
+.btnJ{
     background-color: green;
     margin-right: 20px;
 }
 
-#btn_NichtGewusst{
+.btnN{
     background-color: red;
     margin-left: 20px;
 }

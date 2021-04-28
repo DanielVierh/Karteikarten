@@ -64,6 +64,7 @@ function flipCard() {
 
     if(cardDiscovered == false) {
         try{
+            window.scrollTo(0, 70);
             document.getElementById('kartei_RuecksBegriff').innerHTML = zufallsKarte.begriff;
             document.getElementById('kartei_Begriff').innerHTML = zufallsKarte.beschreibung;
             cardDiscovered = true;
@@ -114,13 +115,15 @@ if(buttonNichtGewusst) {
 function nichtGewusst() {
     try {
         if(zufallsKarte.wissenstandZaehler >= 1) {
+            console.log("Nicht gewusst gedrückt");
             zufallsKarte.wissenstandZaehler -= 1;
             document.getElementById('kartei_Begriff').innerHTML = "";
             document.getElementById('kartei_RuecksBegriff').innerHTML = "";
             cardDiscovered = false;
             saveCards();
+            createCard();
         }
-        createCard();
+        
     } catch (error) {
         console.log(error);
     }
