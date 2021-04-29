@@ -193,12 +193,12 @@ if(buttonSaveNewKarteikarte) {
             return true;
         }
     }
-
+// Save Cards
     function saveCards() {
         localStorage.setItem("storedCards", JSON.stringify(arrKarteikarten));
         console.log("Card´s saved");
     }
-
+//Load Cards
     function loadCards() {
         arrKarteikarten = JSON.parse(localStorage.getItem("storedCards"));
         console.log("Card´s loaded");
