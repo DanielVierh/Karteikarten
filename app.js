@@ -116,12 +116,16 @@ if(buttonNichtGewusst) {
 function nichtGewusst() {
     try {
         if(zufallsKarte.wissenstandZaehler >= 1) {
-            console.log("Nicht gewusst gedrückt");
             zufallsKarte.wissenstandZaehler -= 1;
             document.getElementById('kartei_Begriff').innerHTML = "";
             document.getElementById('kartei_RuecksBegriff').innerHTML = "";
             cardDiscovered = false;
             saveCards();
+            createCard();
+        }else{
+            document.getElementById('kartei_Begriff').innerHTML = "";
+            document.getElementById('kartei_RuecksBegriff').innerHTML = "";
+            cardDiscovered = false;
             createCard();
         }
         
@@ -208,7 +212,7 @@ function scroll_UP() {
 }
 
 function scroll_to_New() {
-    window.scrollTo(0, 1200);
+    window.scrollTo(0, 900);
 }
 
 // Delete current word
@@ -218,7 +222,7 @@ function deleteCurrent(){
         if(decision) {
             arrKarteikarten.splice(zufallsZahl, 1);
             saveCards();
-            alert("Karteikarte wurde gelöscht gelöscht");
+            alert("Karteikarte wurde gelöscht");
             location.reload();
         }
     } catch (error) {
