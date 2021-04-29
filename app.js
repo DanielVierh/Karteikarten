@@ -211,7 +211,17 @@ function scroll_to_New() {
     window.scrollTo(0, 1200);
 }
 
-// Delete Section
+// Delete current word
 function deleteCurrent(){
-    alert("Funktion wird noch gebaut");
+    try {
+        const decision = window.confirm("Karteikarte: (" + zufallsKarte.begriff + ") wirklich löschen?");
+        if(decision) {
+            arrKarteikarten.splice(zufallsZahl, 1);
+            saveCards();
+            alert("Karteikarte wurde gelöscht gelöscht");
+            location.reload();
+        }
+    } catch (error) {
+        console.log(error);
+    }
 }
