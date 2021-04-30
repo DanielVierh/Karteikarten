@@ -176,3 +176,14 @@ body{
 footer{
     margin-left: 30px;
 }
+
+.filter-todo{
+    background-color: cadetblue;
+    margin-right: 10px;
+    font-weight: bold;
+    color: white;
+}
+
+#filterAnzahl{
+    font-weight: bold;
+}
