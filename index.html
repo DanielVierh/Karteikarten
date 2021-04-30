@@ -21,27 +21,31 @@
             <div class="container">
               <div class="rowNxt">
                 <button class="aktionsButton" onclick="scroll_to_New()">NEU &#128196</button>
-                <button class="aktionsButton" onclick="deleteCurrent()">Löschen &#128465</button>
+                <button id="btnDel" class="aktionsButton" onclick="deleteCurrent()">Löschen &#128465</button>
               </div>
-
             </div>
-           
         </div>
     </div>
+
     <!-- Filter -->
     <div class="container">
-      <div class="select">
-        <select name="todos" class="filter-todo">
-            <option value="Alle">Alle</option>
-            <option value="Neu">Neu</option>
-            <option value="level1">Kann ich noch nicht</option>
-            <option value="level2">Habe ich ein bisschen drauf</option>
-            <option value="level3">Kann ich schon ganz gut</option>
-            <option value="level4">Voll verstanden</option>
-        </select>
+      <div class="row filterBox">
+        <p>Filter</p>
+        <div class="select">
+          <select name="level" class="filter-liste">
+              <option value="Alle">Alle</option>
+              <option value="Neu">Neu</option>
+              <option value="level1">Kann ich noch nicht</option>
+              <option value="level2">Habe ich ein bisschen drauf</option>
+              <option value="level3">Kann ich schon ganz gut</option>
+              <option value="level4">Voll verstanden</option>
+          </select>
+        </div>
+        <p id="filterAnzahl">-(0)</p>
+        <!-- <button class="aktionsButton">&#128246 Filtern</button> -->
       </div>
-      <p id="filterAnzahl">-(0)</p>
-    </div>
+      </div>
+
     <br>
 
 
@@ -78,7 +82,7 @@
             <p class="">Beschreibung (Rückseite)</p>
             <textarea class="textfeldRuek" type="text" id="txtBeschreibung"></textarea>
             <br> <hr> <br>
-            <button class="submButton button1" id="btnSaveNewKarteikarte">Speichern &#128190</button>
+            <button class="submButton button1" id="btnSaveNewKarteikarte" onclick="save_New_Card()">Speichern &#128190</button>
           </div>
       </div>
 
@@ -88,8 +92,8 @@
           </div>
       </div>
       <footer>
-        <p> v1.3.1 (29.04.21) --Daniel Vierheilig</p>
-        <p style="color: chartreuse;">NEU: Karteikarten können nun gelöscht werden</p>
+        <p> v1.5.0 (30.04.21) --Daniel Vierheilig</p>
+        <p style="color: chartreuse;">NEU: Karteikarten können nun gefiltert werden</p>
       </footer>
 </body>
 

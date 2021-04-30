@@ -22,8 +22,8 @@ class Karteikarte {
 
 //============================================================================================================================
 
-const filterOption = document.querySelector('.filter-todo');
-filterOption.addEventListener('click', filterTodo);
+const filterOption = document.querySelector('.filter-liste');
+filterOption.addEventListener('click', filterListe);
 
 var buttonCard = document.getElementById('btnCard');
 if(buttonCard) {
@@ -48,9 +48,7 @@ function loadCont() {
 
 // Erstellt neue Random Card
 function createCard() {
-    console.log("In CreateCard");
     try{
-        console.log("In CreateCard Try");
         // Filter = Alle
         if (filterOpt == "Alle") {
             console.log("In CreateCard ALLE");
@@ -92,7 +90,7 @@ function flipCard() {
 
     if(cardDiscovered == false) {
         try{
-            window.scrollTo(0, 130);
+            scroll_to_Card();
             document.getElementById('kartei_RuecksBegriff').innerHTML = zufallsKarte.begriff;
             document.getElementById('kartei_Begriff').innerHTML = zufallsKarte.beschreibung;
             cardDiscovered = true;
@@ -103,8 +101,8 @@ function flipCard() {
     }else{
         try {
             document.getElementById('kartei_RuecksBegriff').innerHTML = "";
-            //document.getElementById('kartei_Begriff').innerHTML = zufallsKarte.begriff;
-            createCard();
+            document.getElementById('kartei_Begriff').innerHTML = zufallsKarte.begriff;
+            //createCard();
             cardDiscovered = false;
         } catch (error) {
             console.log(error);
@@ -114,10 +112,10 @@ function flipCard() {
 
 
 // Gewusst  
-var buttonGewusst = document.getElementById('btn_Gewusst');
-if(buttonGewusst) {
-    buttonGewusst.addEventListener('click', gewusst);
-}
+// var buttonGewusst = document.getElementById('btn_Gewusst');
+// if(buttonGewusst) {
+//     buttonGewusst.addEventListener('click', gewusst);
+// }
 
 function gewusst() {
     try {
@@ -133,10 +131,10 @@ function gewusst() {
 }
 
 // Nicht gewusst 
-var buttonNichtGewusst = document.getElementById('btn_NichtGewusst');
-if(buttonNichtGewusst) {
-    buttonNichtGewusst.addEventListener('click', nichtGewusst);
-}
+// var buttonNichtGewusst = document.getElementById('btn_NichtGewusst');
+// if(buttonNichtGewusst) {
+//     buttonNichtGewusst.addEventListener('click', nichtGewusst);
+// }
 
 function nichtGewusst() {
     try {
@@ -145,12 +143,14 @@ function nichtGewusst() {
             document.getElementById('kartei_Begriff').innerHTML = "";
             document.getElementById('kartei_RuecksBegriff').innerHTML = "";
             cardDiscovered = false;
+            zufallsKarte.abgefragt = true;
             saveCards();
             createCard();
         }else{
             document.getElementById('kartei_Begriff').innerHTML = "";
             document.getElementById('kartei_RuecksBegriff').innerHTML = "";
             cardDiscovered = false;
+            zufallsKarte.abgefragt = true;
             createCard();
         }
         
@@ -187,29 +187,52 @@ function wissensstandAbfrage() {
 // ===================================================================================================================================================================
 // NEUE KARTEIKARTE
 // Neue Karteikarte speichern
-var buttonSaveNewKarteikarte = document.getElementById('btnSaveNewKarteikarte');
-if(buttonSaveNewKarteikarte) {
-    buttonSaveNewKarteikarte.addEventListener('click', function() {
-        var newTerm = document.getElementById('txtBegriff').value;
-        var newDescr = document.getElementById('txtBeschreibung').value;
+// var buttonSaveNewKarteikarte = document.getElementById('btnSaveNewKarteikarte');
+// if(buttonSaveNewKarteikarte) {
+//     buttonSaveNewKarteikarte.addEventListener('click', function() {
+//         var newTerm = document.getElementById('txtBegriff').value;
+//         var newDescr = document.getElementById('txtBeschreibung').value;
 
-        if(checkWort(newTerm) && checkWort(newDescr)) {
-            if(arrKarteikarten == null) {
-              arrKarteikarten = [];
-              arrKarteikarten.push(new Karteikarte(newTerm,newDescr,false,"NEU",0));     
-            }else{
-              arrKarteikarten.push(new Karteikarte(newTerm,newDescr,false,"NEU",0));  
-            }
-            document.getElementById('txtBegriff').value = "";
-            document.getElementById('txtBeschreibung').value = "";
-             // Save
-            saveCards();
-            alert("Die Karteikarte wurde erfolgreich gespeichert");           
+//         if(checkWort(newTerm) && checkWort(newDescr)) {
+//             if(arrKarteikarten == null) {
+//               arrKarteikarten = [];
+//               arrKarteikarten.push(new Karteikarte(newTerm,newDescr,false,"NEU",0));     
+//             }else{
+//               arrKarteikarten.push(new Karteikarte(newTerm,newDescr,false,"NEU",0));  
+//             }
+//             document.getElementById('txtBegriff').value = "";
+//             document.getElementById('txtBeschreibung').value = "";
+//              // Save
+//             saveCards();
+//             alert("Die Karteikarte wurde erfolgreich gespeichert");
+//             document.getElementById("txtBegriff").focus();           
+//         }else{
+//             alert("Bitte beide Textfelder ausfüllen!");
+//         }
+//     }
+// )};
+
+function save_New_Card() {
+    var newTerm = document.getElementById('txtBegriff').value;
+    var newDescr = document.getElementById('txtBeschreibung').value;
+
+    if(checkWort(newTerm) && checkWort(newDescr)) {
+        if(arrKarteikarten == null) {
+          arrKarteikarten = [];
+          arrKarteikarten.push(new Karteikarte(newTerm,newDescr,false,"NEU",0));     
         }else{
-            alert("Bitte beide Textfelder ausfüllen!");
+          arrKarteikarten.push(new Karteikarte(newTerm,newDescr,false,"NEU",0));  
         }
+        document.getElementById('txtBegriff').value = "";
+        document.getElementById('txtBeschreibung').value = "";
+         // Save
+        saveCards();
+        alert("Die Karteikarte wurde erfolgreich gespeichert");
+        document.getElementById("txtBegriff").focus();           
+    }else{
+        alert("Bitte beide Textfelder ausfüllen!");
     }
-    )};
+}
 
     function checkWort(wrt) {
         if (wrt == "") {
@@ -229,7 +252,7 @@ if(buttonSaveNewKarteikarte) {
         console.log("Card´s loaded");
     }
 
-
+// //=====================================================================================================================================
     // Scroll up
 function scroll_UP() {
     window.scrollTo(0, 0);
@@ -237,9 +260,14 @@ function scroll_UP() {
 }
 
 function scroll_to_New() {
-    window.scrollTo(0, 900);
+    window.scrollTo(0, 1150);
 }
 
+function scroll_to_Card() {
+    window.scrollTo(0, 290);
+}
+
+//=====================================================================================================================================
 // Delete current word
 function deleteCurrent(){
     try {
@@ -262,10 +290,11 @@ function deleteCurrent(){
 
 /*Abfrageb bei switch ob filter existiert, wenn ja, ausgeben wenn nein Fehlermeldung und Filter auf Alle setzen */
 
-function filterTodo(e) {
+function filterListe(e) {
         switch(e.target.value){
             case "Alle":
                 document.getElementById('filterAnzahl').innerHTML = "( " + arrKarteikarten.length + " )";
+                document.getElementById('filterAnzahl').style.color = "white";
                 filterOpt = "Alle";
                 createCard();
                 break;
@@ -273,30 +302,37 @@ function filterTodo(e) {
                 checkFilterElemente("NEU");
                 if( gefilterteKarteikarten.length >= 1) {
                     document.getElementById('filterAnzahl').innerHTML = "( " + gefilterteKarteikarten.length + " )";
+                    document.getElementById('filterAnzahl').style.color = "white";
                     filterzaehler = 0;
                     filterOpt = "Neu";
                     createCard();
                 }else{
-                    alert("Es gibt keine Karteikarten im Stapel (NEU)");
-                    location.reload();
+                    //alert("Es gibt keine Karteikarten im Stapel (NEU)");
+                    document.getElementById('filterAnzahl').innerHTML = "Es gibt keine Karteikarten im Stapel (NEU)";
+                    document.getElementById('filterAnzahl').style.color = "red";
+                    //location.reload();
                 }
                 break;
             case "level1":
                 checkFilterElemente("Kann ich noch nicht");
                 if( gefilterteKarteikarten.length >= 1) {
                     document.getElementById('filterAnzahl').innerHTML = "( " + gefilterteKarteikarten.length + " )";
+                    document.getElementById('filterAnzahl').style.color = "white";
                     filterzaehler = 0;
                     filterOpt = "level1";
                     createCard();
                 }else{
-                    alert("Es gibt keine Karteikarten im Stapel (Kann ich noch nicht)");
-                    location.reload();
+                    //alert("Es gibt keine Karteikarten im Stapel (Kann ich noch nicht)");
+                    document.getElementById('filterAnzahl').innerHTML = "Es gibt keine Karteikarten im Stapel (Kann ich noch nicht)";
+                    document.getElementById('filterAnzahl').style.color = "red";
+                    //location.reload();
                 }
                 break;
             case "level2":
                 checkFilterElemente("Habe ich ein bisschen drauf");
                 if( gefilterteKarteikarten.length >= 1) {
                     document.getElementById('filterAnzahl').innerHTML = "( " + gefilterteKarteikarten.length + " )";
+                    document.getElementById('filterAnzahl').style.color = "white";
                     filterzaehler = 0;
                     filterOpt = "level2";
                     createCard();
@@ -309,6 +345,7 @@ function filterTodo(e) {
                 checkFilterElemente("Kann ich schon ganz gut");
                 if( gefilterteKarteikarten.length >= 1) {
                     document.getElementById('filterAnzahl').innerHTML = "( " + gefilterteKarteikarten.length + " )";
+                    document.getElementById('filterAnzahl').style.color = "white";
                     filterzaehler = 0;
                     filterOpt = "level3";
                     createCard();
@@ -321,6 +358,7 @@ function filterTodo(e) {
                 checkFilterElemente("Voll verstanden");
                 if( gefilterteKarteikarten.length >= 1) {
                     document.getElementById('filterAnzahl').innerHTML = "( " + gefilterteKarteikarten.length + " )";
+                    document.getElementById('filterAnzahl').style.color = "white";
                     filterzaehler = 0;
                     filterOpt = "level4";
                     createCard();
@@ -332,6 +370,12 @@ function filterTodo(e) {
             default:
                 console.log("Error bei Switch");
         }    
+        // Delete Button (In)visible
+        if (filterOpt == "Alle") {
+            document.getElementById("btnDel").style.display="block";
+        }else{
+            document.getElementById("btnDel").style.display="none";
+        }
     }
 
 // Funktion um vorhandensein des Filters zu checken

@@ -25,7 +25,7 @@ body{
     border: 2px solid rgb(2, 20, 17);
     margin-bottom: 60px;
     padding-top: 20px ;
-    box-shadow: 9px 9px 16px black;
+    box-shadow: 14px 14px 16px black;
     overflow-y: auto;
     background-image: url(Assets/verlaufGelb.png);
     background-repeat: no-repeat;
@@ -177,13 +177,25 @@ footer{
     margin-left: 30px;
 }
 
-.filter-todo{
+.filterBox{
+ justify-content: center;
+ height: 150px; 
+ border-radius: 12px;
+ background: rgba(22, 22, 22, 0.685);
+ color: white;
+ box-shadow: 1px 1px 10px black;
+}
+
+.filter-liste{
     background-color: cadetblue;
     margin-right: 10px;
     font-weight: bold;
     color: white;
+    border-radius: 12px;
 }
 
 #filterAnzahl{
     font-weight: bold;
+
 }
+
