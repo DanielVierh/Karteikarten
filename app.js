@@ -4,7 +4,9 @@ var arrLength = arrKarteikarten.length;
 var zufallsZahl = 0;
 var zufallsKarte = "";
 var Card_Id = "";
-
+var filterOpt = "Alle";
+var gefilterteKarteikarten = [];
+var filterzaehler = 0;
 //============================================================================================================================
 // Klasse Karteikarte
 
@@ -19,6 +21,9 @@ class Karteikarte {
 }
 
 //============================================================================================================================
+
+const filterOption = document.querySelector('.filter-todo');
+filterOption.addEventListener('click', filterTodo);
 
 var buttonCard = document.getElementById('btnCard');
 if(buttonCard) {
@@ -35,6 +40,7 @@ function loadCont() {
         loadCards();
         arrLength = arrKarteikarten.length;
         document.getElementById('anzKarten').innerHTML = "Karteikarten (" + arrLength + ")";
+        document.getElementById('filterAnzahl').innerHTML = "( " + arrKarteikarten.length + " )";
     }
     console.log(arrKarteikarten);
     createCard();
@@ -42,21 +48,42 @@ function loadCont() {
 
 // Erstellt neue Random Card
 function createCard() {
+    console.log("In CreateCard");
     try{
-        const arrLength = arrKarteikarten.length;
-        zufallsZahl = parseInt(Math.random() * arrLength);
-        zufallsKarte = arrKarteikarten[zufallsZahl];
-        wissensstandAbfrage();
-        var x_1 = document.getElementById('kartei_Begriff');
-        if(x_1){
-           document.getElementById('kartei_Begriff').innerHTML = zufallsKarte.begriff; 
+        console.log("In CreateCard Try");
+        // Filter = Alle
+        if (filterOpt == "Alle") {
+            console.log("In CreateCard ALLE");
+            const arrLength = arrKarteikarten.length;
+            zufallsZahl = parseInt(Math.random() * arrLength);
+            zufallsKarte = arrKarteikarten[zufallsZahl];
+            wissensstandAbfrage();
+            var x_1 = document.getElementById('kartei_Begriff');
+            if(x_1){
+            document.getElementById('kartei_Begriff').innerHTML = zufallsKarte.begriff; 
+            }
+            // Filter = NEU
+        }else if(filterOpt == "Neu" || filterOpt == "level1" || filterOpt == "level2" || filterOpt == "level3" || filterOpt == "level4") {
+            if(filterzaehler <= gefilterteKarteikarten.length -1) {
+                zufallsKarte = arrKarteikarten[gefilterteKarteikarten[filterzaehler]];
+                wissensstandAbfrage();
+                document.getElementById('kartei_Begriff').innerHTML = zufallsKarte.begriff; 
+                filterzaehler += 1;
+            }else{
+                const nochmal = window.confirm("Das waren alle Karteikarten aus dem gefilterten Stapel. Nochmal von vorne?");
+                if (nochmal == true) {
+                    filterzaehler = 0;
+                    createCard();
+                }else{
+                    location.reload();
+                }
+            }
         }
+
     }catch (error){
         document.getElementById('kartei_Begriff').innerHTML = "LEER";
         console.log(error);
     }
-
-
 }
 
 
@@ -82,9 +109,7 @@ function flipCard() {
         } catch (error) {
             console.log(error);
         }
-
     }
-    
 }
 
 
@@ -229,3 +254,96 @@ function deleteCurrent(){
         console.log(error);
     }
 }
+
+
+//=======================================================================================================================
+
+// Filtern  
+
+/*Abfrageb bei switch ob filter existiert, wenn ja, ausgeben wenn nein Fehlermeldung und Filter auf Alle setzen */
+
+function filterTodo(e) {
+        switch(e.target.value){
+            case "Alle":
+                document.getElementById('filterAnzahl').innerHTML = "( " + arrKarteikarten.length + " )";
+                filterOpt = "Alle";
+                createCard();
+                break;
+            case "Neu":
+                checkFilterElemente("NEU");
+                if( gefilterteKarteikarten.length >= 1) {
+                    document.getElementById('filterAnzahl').innerHTML = "( " + gefilterteKarteikarten.length + " )";
+                    filterzaehler = 0;
+                    filterOpt = "Neu";
+                    createCard();
+                }else{
+                    alert("Es gibt keine Karteikarten im Stapel (NEU)");
+                    location.reload();
+                }
+                break;
+            case "level1":
+                checkFilterElemente("Kann ich noch nicht");
+                if( gefilterteKarteikarten.length >= 1) {
+                    document.getElementById('filterAnzahl').innerHTML = "( " + gefilterteKarteikarten.length + " )";
+                    filterzaehler = 0;
+                    filterOpt = "level1";
+                    createCard();
+                }else{
+                    alert("Es gibt keine Karteikarten im Stapel (Kann ich noch nicht)");
+                    location.reload();
+                }
+                break;
+            case "level2":
+                checkFilterElemente("Habe ich ein bisschen drauf");
+                if( gefilterteKarteikarten.length >= 1) {
+                    document.getElementById('filterAnzahl').innerHTML = "( " + gefilterteKarteikarten.length + " )";
+                    filterzaehler = 0;
+                    filterOpt = "level2";
+                    createCard();
+                }else{
+                    alert("Es gibt keine Karteikarten im Stapel (Habe ich ein bisschen drauf)");
+                    location.reload();
+                }
+                break;
+            case "level3":
+                checkFilterElemente("Kann ich schon ganz gut");
+                if( gefilterteKarteikarten.length >= 1) {
+                    document.getElementById('filterAnzahl').innerHTML = "( " + gefilterteKarteikarten.length + " )";
+                    filterzaehler = 0;
+                    filterOpt = "level3";
+                    createCard();
+                }else{
+                    alert("Es gibt keine Karteikarten im Stapel (Kann ich schon ganz gut)");
+                    location.reload();
+                }
+                break;
+            case "level4":
+                checkFilterElemente("Voll verstanden");
+                if( gefilterteKarteikarten.length >= 1) {
+                    document.getElementById('filterAnzahl').innerHTML = "( " + gefilterteKarteikarten.length + " )";
+                    filterzaehler = 0;
+                    filterOpt = "level4";
+                    createCard();
+                }else{
+                    alert("Es gibt keine Karteikarten im Stapel (Voll verstanden)");
+                    location.reload();
+                }
+                break;
+            default:
+                console.log("Error bei Switch");
+        }    
+    }
+
+// Funktion um vorhandensein des Filters zu checken
+    function checkFilterElemente(filterParameter) {
+        var isAvailable = false;
+        var vergleichswort = "";
+        gefilterteKarteikarten = [];
+        for(var i= 0 ; i < arrKarteikarten.length; i++) {
+            vergleichswort = arrKarteikarten[i].wissensstand;
+            if(vergleichswort == filterParameter) {
+                isAvailable = true;
+                gefilterteKarteikarten.push(i);
+            }
+        }  
+    }

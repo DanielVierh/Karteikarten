@@ -28,6 +28,23 @@
            
         </div>
     </div>
+    <!-- Filter -->
+    <div class="container">
+      <div class="select">
+        <select name="todos" class="filter-todo">
+            <option value="Alle">Alle</option>
+            <option value="Neu">Neu</option>
+            <option value="level1">Kann ich noch nicht</option>
+            <option value="level2">Habe ich ein bisschen drauf</option>
+            <option value="level3">Kann ich schon ganz gut</option>
+            <option value="level4">Voll verstanden</option>
+        </select>
+      </div>
+      <p id="filterAnzahl">-(0)</p>
+    </div>
+    <br>
+
+
     <div class="container">
         <div class="row">
           <div class="col-sm" id="btnCard">
@@ -57,7 +74,7 @@
             <p class="">Begriff (Vorderseite)</p> 
             <input class="textfeldBegriff" type="text" id="txtBegriff">
             <br> <hr> <br>
-            
+
             <p class="">Beschreibung (Rückseite)</p>
             <textarea class="textfeldRuek" type="text" id="txtBeschreibung"></textarea>
             <br> <hr> <br>
