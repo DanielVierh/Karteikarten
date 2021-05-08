@@ -187,31 +187,6 @@ function wissensstandAbfrage() {
 // ===================================================================================================================================================================
 // NEUE KARTEIKARTE
 // Neue Karteikarte speichern
-// var buttonSaveNewKarteikarte = document.getElementById('btnSaveNewKarteikarte');
-// if(buttonSaveNewKarteikarte) {
-//     buttonSaveNewKarteikarte.addEventListener('click', function() {
-//         var newTerm = document.getElementById('txtBegriff').value;
-//         var newDescr = document.getElementById('txtBeschreibung').value;
-
-//         if(checkWort(newTerm) && checkWort(newDescr)) {
-//             if(arrKarteikarten == null) {
-//               arrKarteikarten = [];
-//               arrKarteikarten.push(new Karteikarte(newTerm,newDescr,false,"NEU",0));     
-//             }else{
-//               arrKarteikarten.push(new Karteikarte(newTerm,newDescr,false,"NEU",0));  
-//             }
-//             document.getElementById('txtBegriff').value = "";
-//             document.getElementById('txtBeschreibung').value = "";
-//              // Save
-//             saveCards();
-//             alert("Die Karteikarte wurde erfolgreich gespeichert");
-//             document.getElementById("txtBegriff").focus();           
-//         }else{
-//             alert("Bitte beide Textfelder ausfüllen!");
-//         }
-//     }
-// )};
-
 function save_New_Card() {
     var newTerm = document.getElementById('txtBegriff').value;
     var newDescr = document.getElementById('txtBeschreibung').value;
@@ -253,7 +228,7 @@ function save_New_Card() {
     }
 
 // //=====================================================================================================================================
-    // Scroll up
+    // Scroll up / Down
 function scroll_UP() {
     window.scrollTo(0, 0);
     console.log("ScrollUP");
@@ -264,7 +239,7 @@ function scroll_to_New() {
 }
 
 function scroll_to_Card() {
-    window.scrollTo(0, 290);
+    window.scrollTo(0, 350);
 }
 
 //=====================================================================================================================================
