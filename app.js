@@ -111,12 +111,6 @@ function flipCard() {
 }
 
 
-// Gewusst  
-// var buttonGewusst = document.getElementById('btn_Gewusst');
-// if(buttonGewusst) {
-//     buttonGewusst.addEventListener('click', gewusst);
-// }
-
 function gewusst() {
     try {
         zufallsKarte.wissenstandZaehler += 1;
@@ -131,11 +125,6 @@ function gewusst() {
 }
 
 // Nicht gewusst 
-// var buttonNichtGewusst = document.getElementById('btn_NichtGewusst');
-// if(buttonNichtGewusst) {
-//     buttonNichtGewusst.addEventListener('click', nichtGewusst);
-// }
-
 function nichtGewusst() {
     try {
         if(zufallsKarte.wissenstandZaehler >= 1) {
@@ -239,10 +228,17 @@ function scroll_to_New() {
 }
 
 function scroll_to_Card() {
-    window.scrollTo(0, 380);
+    window.scrollTo(0, 420);
 }
 
 //=====================================================================================================================================
+
+// Refresh Page
+function refresh_Page() {
+    location.reload();
+}
+
+
 // Delete current word
 function deleteCurrent(){
     try {
