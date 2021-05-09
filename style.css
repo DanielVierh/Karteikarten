@@ -198,6 +198,7 @@ footer{
     background-color: cadetblue;
     margin-right: 10px;
     font-weight: bold;
+    font-size: 13px;
     color: white;
     border-radius: 12px;
     width: 100%;
@@ -205,6 +206,7 @@ footer{
 
 #filterAnzahl{
     font-weight: bold;
+    font-size: 12px;
 
 }
 

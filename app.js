@@ -110,13 +110,14 @@ function flipCard() {
     }
 }
 
-
+// Gewusst
 function gewusst() {
     try {
         zufallsKarte.wissenstandZaehler += 1;
         document.getElementById('kartei_Begriff').innerHTML = "";
         document.getElementById('kartei_RuecksBegriff').innerHTML = "";
         cardDiscovered = false;
+        wissensstandAbfrage();
         saveCards();
         createCard();
     } catch (error) {
@@ -133,6 +134,7 @@ function nichtGewusst() {
             document.getElementById('kartei_RuecksBegriff').innerHTML = "";
             cardDiscovered = false;
             zufallsKarte.abgefragt = true;
+            wissensstandAbfrage();
             saveCards();
             createCard();
         }else{
@@ -262,9 +264,10 @@ function deleteCurrent(){
 /*Abfrageb bei switch ob filter existiert, wenn ja, ausgeben wenn nein Fehlermeldung und Filter auf Alle setzen */
 
 function filterListe(e) {
+        check_Amount_of_Elements_in_Wissensstand();
         switch(e.target.value){
             case "Alle":
-                document.getElementById('filterAnzahl').innerHTML = "( " + arrKarteikarten.length + " )";
+                document.getElementById('filterAnzahl').innerHTML = "( " + arrKarteikarten.length + " ) Karteikarten";
                 document.getElementById('filterAnzahl').style.color = "white";
                 filterOpt = "Alle";
                 createCard();
@@ -272,70 +275,66 @@ function filterListe(e) {
             case "Neu":
                 checkFilterElemente("NEU");
                 if( gefilterteKarteikarten.length >= 1) {
-                    document.getElementById('filterAnzahl').innerHTML = "( " + gefilterteKarteikarten.length + " )";
+                    document.getElementById('filterAnzahl').innerHTML = "( " + gefilterteKarteikarten.length + " ) Karteikarten";
                     document.getElementById('filterAnzahl').style.color = "white";
                     filterzaehler = 0;
                     filterOpt = "Neu";
                     createCard();
                 }else{
-                    //alert("Es gibt keine Karteikarten im Stapel (NEU)");
                     document.getElementById('filterAnzahl').innerHTML = "Es gibt keine Karteikarten im Stapel (NEU)";
                     document.getElementById('filterAnzahl').style.color = "red";
-                    //location.reload();
                 }
                 break;
             case "level1":
                 checkFilterElemente("Kann ich noch nicht");
                 if( gefilterteKarteikarten.length >= 1) {
-                    document.getElementById('filterAnzahl').innerHTML = "( " + gefilterteKarteikarten.length + " )";
+                    document.getElementById('filterAnzahl').innerHTML = "( " + gefilterteKarteikarten.length + " ) Karteikarten";
                     document.getElementById('filterAnzahl').style.color = "white";
                     filterzaehler = 0;
                     filterOpt = "level1";
                     createCard();
                 }else{
-                    //alert("Es gibt keine Karteikarten im Stapel (Kann ich noch nicht)");
                     document.getElementById('filterAnzahl').innerHTML = "Es gibt keine Karteikarten im Stapel (Kann ich noch nicht)";
                     document.getElementById('filterAnzahl').style.color = "red";
-                    //location.reload();
                 }
                 break;
             case "level2":
                 checkFilterElemente("Habe ich ein bisschen drauf");
                 if( gefilterteKarteikarten.length >= 1) {
-                    document.getElementById('filterAnzahl').innerHTML = "( " + gefilterteKarteikarten.length + " )";
+                    document.getElementById('filterAnzahl').innerHTML = "( " + gefilterteKarteikarten.length + " ) Karteikarten";
                     document.getElementById('filterAnzahl').style.color = "white";
                     filterzaehler = 0;
                     filterOpt = "level2";
                     createCard();
                 }else{
-                    alert("Es gibt keine Karteikarten im Stapel (Habe ich ein bisschen drauf)");
-                    location.reload();
+                    document.getElementById('filterAnzahl').innerHTML = "Es gibt keine Karteikarten im Stapel (Habe ich ein bisschen drauf)";
+                    document.getElementById('filterAnzahl').style.color = "red";
                 }
                 break;
             case "level3":
                 checkFilterElemente("Kann ich schon ganz gut");
                 if( gefilterteKarteikarten.length >= 1) {
-                    document.getElementById('filterAnzahl').innerHTML = "( " + gefilterteKarteikarten.length + " )";
+                    document.getElementById('filterAnzahl').innerHTML = "( " + gefilterteKarteikarten.length + " ) Karteikarten";
                     document.getElementById('filterAnzahl').style.color = "white";
                     filterzaehler = 0;
                     filterOpt = "level3";
                     createCard();
                 }else{
-                    alert("Es gibt keine Karteikarten im Stapel (Kann ich schon ganz gut)");
-                    location.reload();
+                    document.getElementById('filterAnzahl').innerHTML = "Es gibt keine Karteikarten im Stapel (Kann ich schon ganz gut)";
+                    document.getElementById('filterAnzahl').style.color = "red";
                 }
                 break;
             case "level4":
                 checkFilterElemente("Voll verstanden");
                 if( gefilterteKarteikarten.length >= 1) {
-                    document.getElementById('filterAnzahl').innerHTML = "( " + gefilterteKarteikarten.length + " )";
+                    document.getElementById('filterAnzahl').innerHTML = "( " + gefilterteKarteikarten.length + " ) Karteikarten";
                     document.getElementById('filterAnzahl').style.color = "white";
                     filterzaehler = 0;
                     filterOpt = "level4";
                     createCard();
                 }else{
-                    alert("Es gibt keine Karteikarten im Stapel (Voll verstanden)");
-                    location.reload();
+                    document.getElementById('filterAnzahl').innerHTML = "Es gibt keine Karteikarten im Stapel (Voll verstanden)";
+                    document.getElementById('filterAnzahl').style.color = "red";
                 }
                 break;
             default:
@@ -351,14 +350,67 @@ function filterListe(e) {
 
 // Funktion um vorhandensein des Filters zu checken
     function checkFilterElemente(filterParameter) {
-        var isAvailable = false;
+        // var isAvailable = false;
         var vergleichswort = "";
         gefilterteKarteikarten = [];
         for(var i= 0 ; i < arrKarteikarten.length; i++) {
             vergleichswort = arrKarteikarten[i].wissensstand;
             if(vergleichswort == filterParameter) {
-                isAvailable = true;
+                // isAvailable = true;
                 gefilterteKarteikarten.push(i);
             }
         }  
+    }
+        // Anzahl an vorhandenen Elementen anzeigen
+        // opt1 = NEU // opt2 = Kann ich noch nicht // opt3 = Habe ich ein bisschen drauf // opt4 = Kann ich schon ganz gut // opt5 = Voll verstanden
+    function check_Amount_of_Elements_in_Wissensstand() {
+        let options = ["NEU","Kann ich noch nicht","Habe ich ein bisschen drauf","Kann ich schon ganz gut","Voll verstanden"];
+        var currentAmount = 0;
+        var vergleichswort = "";
+        var suchwort = "";
+        var amount_opt1 = 0;
+        var amount_opt2 = 0;
+        var amount_opt3 = 0;
+        var amount_opt4 = 0;
+        var amount_opt5 = 0;
+
+        for(var i = 0; i < options.length; i++) {
+            suchwort = options[i];
+            
+            for(var j= 0 ; j < arrKarteikarten.length; j++) {
+                vergleichswort = arrKarteikarten[j].wissensstand;
+                if(vergleichswort == suchwort) {
+                    currentAmount += 1;
+                }
+            }
+                switch (i) {
+                    case 0:
+                        amount_opt1 = currentAmount;
+                        currentAmount = 0;
+                        break;
+                    case 1:
+                        amount_opt2 = currentAmount;
+                        currentAmount = 0;
+                        break;
+                    case 2:
+                        amount_opt3 = currentAmount;
+                        currentAmount = 0;
+                        break;
+                    case 3:
+                        amount_opt4 = currentAmount;
+                        currentAmount = 0;
+                        break;
+                    case 4:
+                        amount_opt5 = currentAmount;
+                        currentAmount = 0;
+                        break;
+                    default:
+                        break;
+                }
+        }
+        document.getElementById('opt1').innerHTML = "NEU (" + amount_opt1 + ")";
+        document.getElementById('opt2').innerHTML = "Kann ich noch nicht (" + amount_opt2 + ")";
+        document.getElementById('opt3').innerHTML = "Habe ich ein bisschen drauf (" + amount_opt3 + ")";
+        document.getElementById('opt4').innerHTML = "Kann ich schon ganz gut (" + amount_opt4 + ")";
+        document.getElementById('opt5').innerHTML = "Voll verstanden (" + amount_opt5 + ")";
     }
